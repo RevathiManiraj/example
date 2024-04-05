@@ -1,0 +1,52 @@
+# nile.toml file generated for strange-wilson8 on 2024-04-05T13:11:49+05:30
+
+app = "strange-wilson8"
+github = "https://github.com/RevathiManiraj/example/archive/refs/heads/master.zip"
+id = "e90bb0d5ee595cd49cfa6402d87cec7034d20d7c44005c7536126cfd137bdd1a3019e20f14430f5ec08818156b11ea84"
+
+[build]
+  builtin = "GitHub"
+
+kill_signal = "SIGINT"
+kill_timeout = 5
+
+[env]
+
+[experimental]
+  allowed_public_ports = []
+  auto_rollback = true
+
+[[services]]
+  external_port = 80
+  http_checks = []
+  internal_port = 4000
+  protocol = "tcp"
+  routing_policy = "Geolocation"
+  script_checks = []
+
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [services.limits]
+    cpu = "1"
+    memory = "256"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [services.requests]
+    cpu = "0.5"
+    memory = "128"
+
+  [[services.tcp_checks]]
+    grace_period = "1s"
+    interval = "15s"
+    restart_limit = 6
+    timeout = "2s"
